@@ -1,0 +1,29 @@
+#myTab {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    max-width: 768px;
+    margin: 0 auto;
+    text-align: center;
+    -webkit-transition: bottom 0.3s;
+    -moz-transition: bottom 0.3s;
+    -ms-transition: bottom 0.3s;
+    -o-transition: bottom 0.3s;
+    transition: bottom 0.3s;
+    &.hidden {
+        bottom: -4.4rem;
+    }
+    a {
+        float: left;
+        width: 25%;
+        padding: .4rem 0;
+        color: inherit;
+        i {
+            font-size: 1.8rem;
+            line-height: 1;
+        }
+        span {
+            display: block;
+        }
+    }
+}

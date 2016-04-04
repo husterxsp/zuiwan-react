@@ -1,0 +1,99 @@
+.media-detail {
+    padding-bottom: 5rem;
+    .intro {
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+        margin-bottom: 2rem;
+        top: 0;
+        left: 0;
+        text-align: center;
+        background: no-repeat center/86.6% auto;
+        background-image: url(/img/media-detail-back.png);
+        .img {
+            width: 24.4%;
+            padding-top: 24.4%;
+            margin: 4% auto 0;
+            border-radius: 50%;
+            border: 1px solid #F1F1F1;
+            background: no-repeat center/cover;
+        }
+        .name {
+            font-size: 1.3rem;
+            margin: 4% auto;
+        }
+        & > p {
+            width: 66.7%;
+            margin: 0 auto;
+            margin-bottom: 6%;
+        }
+        .activity {
+            overflow: hidden;
+            width: 66.7%;
+            margin: 0 auto;
+            .circle {
+                position: relative;
+                font-size: 1.4rem;
+                width: 100%;
+                padding-top: 100%;
+                margin-bottom: .5rem;
+                border: 1px solid;
+                border-radius: 50%;
+                & > span, i {
+                    text-align: center;
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    left: 0;
+                    bottom: 0;
+                    margin: auto;
+                    width: 2.1rem;
+                    height: 2.1rem;
+                    line-height: 2.1rem;
+                }
+            }
+            & > div {
+                float: left;
+                width: 19.5%;
+                margin: 0 6.5%;
+            }
+        }
+    }
+    .article-list {
+        overflow: hidden;
+        .article-item {
+            position: relative;
+            float: left;
+            width: 46.67%;
+            padding-top: 46.67%;
+            margin-left: 2.22%;
+            margin-bottom: 2.22%;
+            background: no-repeat center/cover;
+            background-image: url(/img/recommend-back.png);
+            .article-content {
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                .title {
+                    font-size: 1.3rem;
+                    overflow: hidden;
+                    margin: .3rem .65rem .4rem;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                }
+                .type {
+                    overflow: hidden;
+                    margin: .3rem .65rem .4rem;
+                }
+                span {
+                    float: left;
+                    width: 50%;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                }
+            }
+        }
+    }
+}

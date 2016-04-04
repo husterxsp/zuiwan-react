@@ -1,0 +1,34 @@
+.media {
+    width: 95.56%;
+    margin: 0 auto;
+    li {
+        & > a {
+            position: relative;
+            display: block;
+            padding: 1.3rem 1.95rem 1.95rem 5.6rem;
+            border-bottom: 1px solid;
+            .media-logo {
+                position: absolute;
+                left: 0.6rem;
+                top: 2.6rem;
+                width: 3.7rem;
+                height: 3.7rem;
+                border-radius: 50%;
+            }
+            .content {
+                .title {
+                    font-size: 1.3rem;
+                    margin-bottom: 1rem;
+                }
+                .intro {
+                    height: 3rem;
+                    display: -webkit-box;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    -webkit-line-clamp: 2;
+                    -webkit-box-orient: vertical;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,77 @@
+@pink: #ff4081;
+
+#slide-hold {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding-top: 62.22%;
+    #slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+        .slideList {
+            position: absolute;
+            overflow: hidden;
+            left: 0;
+            width: 300%;
+            height: 100%;
+            & > a {
+                position: relative;
+                color: inherit;
+                float: left;
+                width: 33.33%;
+                height: 100%;
+                background: no-repeat center/cover;
+                .content {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    box-sizing: border-box;
+                    width: 100%;
+                    height: 100%;
+                    padding: 20% 8.88% 0 8.88%;
+                    background-color: rgba(33, 33, 33, 0.5);
+                    .title {
+                        font-size: 1.7rem;
+                        overflow: hidden;
+                        margin-bottom: 4%;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                    }
+                    p {
+                        display: -webkit-box;
+                        overflow: hidden;
+                        width: 80%;
+                        height: 4.5rem;
+                        margin-top: 4%;
+                        text-overflow: ellipsis;
+                        -webkit-line-clamp: 3;
+                        -webkit-box-orient: vertical;
+                    }
+                }
+            }
+        }
+        .dot {
+            position: absolute;
+            z-index: 1;
+            right: 6%;
+            bottom: 7%;
+            overflow: hidden;
+            span {
+                display: block;
+                float: left;
+                width: .6rem;
+                height: .6rem;
+                margin-left: .5rem;
+                border-radius: 50%;
+                background-color: #cfcbc7;
+                &.active {
+                    background-color: fade(@pink, 75%);
+                }
+            }
+        }
+    }
+}

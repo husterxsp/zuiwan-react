@@ -1,0 +1,40 @@
+.topicList > a {
+    position: relative;
+    display: block;
+    color: inherit;
+    padding-top: 35.55%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    &:nth-child(1) {
+        padding-top: 44.4%;
+        .content {
+            .title {
+                margin-top: 18%;
+            }
+        }
+    }
+    .content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, .4);
+        .title {
+            width: 82.22%;
+            margin: 8% auto 3%;
+            .title-h {
+                font-size: 1.8rem;
+                margin-right: .7rem;
+            }
+            .number {
+                margin-right: 3px;
+            }
+        }
+        & > p {
+            width: 82.88%;
+            margin: 0 auto;
+        }
+    }
+}
