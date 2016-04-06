@@ -1,27 +1,26 @@
-import React from 'react'
+import React from 'react';
 import {
     Link
 }
-from 'react-router'
-
+from 'react-router';
 import './Tab.less';
 
-module.exports = React.createClass({
-
-    getInitialState: function() {
-        return {
+export default class Tab extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
             showLoading: true,
             hideTab: false,
             lastScrollTop: 0
         };
-    },
-    componentDidMount: function() {
+    }
+    componentDidMount() {
         window.addEventListener('scroll', this.handleScroll);
-    },
-    componentWillUnmount: function() {
+    }
+    componentWillUnmount() {
         window.removeEventListener('scroll', this.handleScroll);
-    },
-    handleScroll: function(e) {
+    }
+    handleScroll(e) {
         var scrollTop = e.srcElement.body.scrollTop;
         if (scrollTop > this.state.lastScrollTop) {
             this.setState({
@@ -35,8 +34,8 @@ module.exports = React.createClass({
         this.setState({
             lastScrollTop: scrollTop
         });
-    },
-    render: function() {
+    }
+    render() {
         return (
             <div>
                 {this.props.children}
@@ -49,4 +48,4 @@ module.exports = React.createClass({
             </div>
         );
     }
-});
+}

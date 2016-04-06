@@ -1,14 +1,13 @@
-import React from 'react'
-import Swipe from 'swipe-js'
-
-import RecommendSlide from './RecommendSlide/RecommendSlide.js'
-import ArticleList from '../ArticleList/ArticleList.js'
-
+import React from 'react';
+import Swipe from 'swipe-js';
+import RecommendSlide from './RecommendSlide/RecommendSlide.js';
+import ArticleList from '../ArticleList/ArticleList.js';
 import './Recommend.less'
 
-module.exports = React.createClass({
-    getInitialState: function() {
-        return {
+export default class Recommend extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
             showLoading: true,
             banner: [],
             recommend: [],
@@ -16,19 +15,18 @@ module.exports = React.createClass({
             page: 1,
             loadingData: false,
         };
-    },
-    componentDidMount: function() {
+    }
+    componentDidMount() {
         this.getRecommend();
         window.addEventListener('scroll', this.handleScroll);
-    },
-    componentWillUnmount: function() {
+    }
+    componentWillUnmount() {
         window.removeEventListener('scroll', this.handleScroll);
-    },
-    handleScroll: function(e) {
-        var body = e.target.body;
-        var height1 = body.offsetHeight + body.scrollTop;
+    }
+    handleScroll(e) {
+        let body = e.target.body;
+        let height1 = body.offsetHeight + body.scrollTop;
         if (height1 > $("#App").height() - 300) {
-
             if (!this.state.loadingData && this.state.page) {
                 this.getRecommend();
                 this.setState({
@@ -36,11 +34,11 @@ module.exports = React.createClass({
                 })
             }
         }
-    },
-    getRecommend: function() {
-        var that = this;
-        var page = that.state.page;
-        $.get("/zuiwan-backend/index.php/article/get_recommend", {
+    }
+    getRecommend() {
+        let that = this;
+        let page = that.state.page;
+        $.get("http://zuiwant.com/zuiwan-backend/index.php/article/get_recommend", {
                 page: page
             })
             .done(function(res) {
@@ -75,9 +73,9 @@ module.exports = React.createClass({
             .fail(function(res) {
                 console.log(res);
             });
-    },
-    initSlide: function() {
-        var that = this;
+    }
+    initSlide() {
+        let that = this;
         new Swipe($(".recommend #slide")[0], {
             startSlide: 0,
             speed: 400,
@@ -91,8 +89,8 @@ module.exports = React.createClass({
                 })
             }
         });
-    },
-    render: function() {
+    }
+    render() {
         return (
             <div className="recommend">
                 <RecommendSlide slide={this.state.banner} index={this.state.bannerIndex}/>
@@ -102,4 +100,5 @@ module.exports = React.createClass({
             </div>
         )
     }
-})
+
+}

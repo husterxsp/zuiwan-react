@@ -1,21 +1,20 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React from 'react';
+import ReactDOM from 'react-dom';
 import {
     Router, Route, Redirect, browserHistory, IndexRoute, IndexRedirect, hashHistory
 }
-from 'react-router'
+from 'react-router';
 
-import Tab from './components/Tab/Tab.js'
-import Recommend from './components/Recommend/Recommend.js'
-import Topic from './components/Topic/Topic.js'
-import TopicDetail from './components/Topic/TopicDetail/TopicDetail.js'
-import Media from './components/Media/Media.js'
-import MediaDetail from './components/Media/MediaDetail/MediaDetail.js'
-import Account from './components/Account/Account.js'
-import Login from './components/Login/Login.js'
-import Register from './components/Register/Register.js'
-import Article from './components/Article/Article.js'
-
+import Tab from './components/Tab/Tab.js';
+import Recommend from './components/Recommend/Recommend.js';
+import Topic from './components/Topic/Topic.js';
+import TopicDetail from './components/Topic/TopicDetail/TopicDetail.js';
+import Media from './components/Media/Media.js';
+import MediaDetail from './components/Media/MediaDetail/MediaDetail.js';
+import Account from './components/Account/Account.js';
+import Login from './components/Login/Login.js';
+import Register from './components/Register/Register.js';
+import Article from './components/Article/Article.js';
 
 import "./css/main.less";
 import "./css/day.less";

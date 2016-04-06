@@ -1,16 +1,14 @@
-var React = require('react');
+import React from 'react';
 import {
     Link
 }
-from 'react-router'
-
+from 'react-router';
 import './ArticleList.less';
 
-module.exports = React.createClass({
-
-    render: function() {
-        var list = this.props.list;
-        var articleComps = list.map(function(item) {
+export default class ArticleList extends React.Component {
+    render() {
+        let list = this.props.list;
+        let articleComps = list.map((item) => {
             return <Link key={item.id} to={"/article/"+item.id} className="articleItem" style={{backgroundImage: 'url(' + item.article_img + ')'}}>
                         <div className="article-content" style={{backgroundColor: item.article_color}}>
                             <p className="title">{item.article_title}</p>
@@ -28,4 +26,4 @@ module.exports = React.createClass({
         )
     }
 
-});
+}

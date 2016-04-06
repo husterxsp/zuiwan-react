@@ -1,14 +1,14 @@
-var React = require('react');
+import React from 'react';
 import {
     Link
 }
-from 'react-router'
-
+from 'react-router';
 import './Article.less';
 
-module.exports = React.createClass({
-    getInitialState: function() {
-        return {
+export default class Article extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
             article: {
                 article_author: "",
                 article_content: "",
@@ -27,13 +27,13 @@ module.exports = React.createClass({
                     topic_img: "",
                     topic_intro: "",
                     topic_name: "",
-                },
+                }
             }
         }
-    },
-    componentDidMount: function() {
-        var that = this;
-        $.get("/zuiwan-backend/index.php/article/get_one_article", {
+    }
+    componentDidMount() {
+        let that = this;
+        $.get("http://zuiwant.com/zuiwan-backend/index.php/article/get_one_article", {
                 id: that.props.params.id
             })
             .done(function(res) {
@@ -46,9 +46,9 @@ module.exports = React.createClass({
             .fail(function(res) {
                 console.log(res);
             });
-    },
-    render: function() {
-        var article = this.state.article;
+    }
+    render() {
+        let article = this.state.article;
         return (
             <div className="article">
                 <div className="intro">
@@ -79,4 +79,4 @@ module.exports = React.createClass({
         );
     }
 
-});
+}

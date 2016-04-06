@@ -1,14 +1,14 @@
-import React from 'react'
+import React from 'react';
 import {
     Link
 }
-from 'react-router'
+from 'react-router';
+import './TopicDetail.less';
 
-import './TopicDetail.less'
-
-module.exports = React.createClass({
-    getInitialState: function() {
-        return {
+export default class TopicDetail extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
             showLoading: true,
             topicInfo: {
                 article_count: 2,
@@ -18,10 +18,10 @@ module.exports = React.createClass({
                 topic_name: "",
             }
         };
-    },
-    componentDidMount: function() {
-        var that = this;
-        $.get("/zuiwan-backend/index.php/topic/get_one_topic", {
+    }
+    componentDidMount() {
+        let that = this;
+        $.get("http://zuiwant.com/zuiwan-backend/index.php/topic/get_one_topic", {
                 id: that.props.params.id
             })
             .done(function(res) {
@@ -35,13 +35,10 @@ module.exports = React.createClass({
             .fail(function(res) {
                 console.log(res);
             });
-    },
-    formData: function() {
-
-    },
-    render: function() {
-        var topicInfo = this.state.topicInfo;
-        var articleComps = topicInfo.articles.map(function(item) {
+    }
+    render() {
+        let topicInfo = this.state.topicInfo;
+        let articleComps = topicInfo.articles.map((item) => {
             return (
                 <div className="topic-article" key={item.id}>
                     <Link to={'/article/'+item.id} className="title-image" style={{backgroundImage: 'url('+item.article_img+')'}}>
@@ -63,7 +60,7 @@ module.exports = React.createClass({
         });
         return (
             <div className="topic-detail">
-                <div className="topic-intro" style={{backgroundImage: 'url('+topicInfo.topic_img+')'}}>
+        <div className="topic-intro" style={{backgroundImage: 'url('+topicInfo.topic_img+')'}}>
                     <div className="intro-content">
                         <div className="title">{topicInfo.topic_name}</div>
                         <p>{topicInfo.topic_intro}</p>
@@ -75,4 +72,4 @@ module.exports = React.createClass({
         );
     }
 
-});
+}

@@ -1,50 +1,51 @@
-import React from 'react'
+import React from 'react';
 import {
     Link, History, router, context
 }
-from 'react-router'
+from 'react-router';
 
 import './Account.less';
-import ArticleList from '../ArticleList/ArticleList.js'
+import ArticleList from '../ArticleList/ArticleList.js';
 
-module.exports = React.createClass({
-    contextTypes: {
-        router: React.PropTypes.object.isRequired
-    },
-    getInitialState: function() {
-        return {
+export default class Account extends React.Component {
+    static contextTypes = {
+        router: React.PropTypes.func.isRequired
+    };
+    constructor(props) {
+        super();
+        this.state = {
             userInfo: {
                 articles: [],
                 medias: [],
                 user_avatar: "",
                 username: "",
             }
-        }
-    },
-    get: function(name) {
-        var cookieName = encodeURIComponent(name) + "=";
-        var cookieStart = document.cookie.indexOf(cookieName);
-        var cookieValue = "";
+        };
+    }
+    get() {
+        let cookieName = encodeURIComponent(name) + "=";
+        let cookieStart = document.cookie.indexOf(cookieName);
+        let cookieValue = "";
 
         if (cookieStart > -1) {
-            var cookieEnd = document.cookie.indexOf(";", cookieStart);
+            let cookieEnd = document.cookie.indexOf(";", cookieStart);
             if (cookieEnd == -1) {
                 cookieEnd = document.cookie.length;
             }
             cookieValue = decodeURIComponent(document.cookie.substring(cookieStart + cookieName.length, cookieEnd));
         }
         return cookieValue;
-    },
-    exit: function() {
+    }
+    exit() {
         document.cookie = 'zw_username=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/;';
         this.context.router.push("/me/login")
-    },
-    componentDidMount: function() {
+    }
+    componentDidMount() {
         if (!this.get("zw_username")) {
             this.context.router.push("/me/login")
         }
-        var that = this;
-        $.get("/zuiwan-backend/index.php/user/get_detail")
+        let that = this;
+        $.get("http://zuiwant.com/zuiwan-backend/index.php/user/get_detail")
             .done(function(res) {
                 that.setState({
                     userInfo: res
@@ -55,10 +56,10 @@ module.exports = React.createClass({
                 console.log(res);
 
             });
-    },
-    render: function() {
-        var userInfo = this.state.userInfo;
-        var attentionComps = userInfo.medias.map(function(item, index) {
+    }
+    render() {
+        let userInfo = this.state.userInfo;
+        let attentionComps = userInfo.medias.map((item, index) => {
             return (
                 <li key={index}>
                     <Link to={'/media/'+item.id}>
@@ -69,13 +70,13 @@ module.exports = React.createClass({
             )
         });
 
-        var faviconURL = require('../../img/favicon.png');
+        let faviconURL = require('../../img/favicon.png');
         return (
             <div className="account">
                 <div className="me">
                     <img className="avatar" src={faviconURL} />
                     <div className="name">{userInfo.username}</div>
-                    <div className="exit" onClick={this.exit}>退出</div>
+                    <div className="exit" onClick={e=>this.exit(e)}>退出</div>
                     <div className="mode"></div>
                     <a className="feedback" href="mailto:advice@sicun.org">意见吐槽</a>
                 </div>
@@ -101,4 +102,4 @@ module.exports = React.createClass({
         );
     }
 
-});
+}

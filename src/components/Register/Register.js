@@ -1,27 +1,29 @@
-import React from 'react'
+import React from 'react';
+import md5 from 'md5';
+import './Register.less';
 
-var LinkedStateMixin = require('react/lib/LinkedStateMixin');
-var md5 = require('md5');
-
-import './Register.less'
-
-var Register = React.createClass({
-    mixins: [LinkedStateMixin],
-    contextTypes: {
-        router: React.PropTypes.object.isRequired
-    },
-    getInitialState: function() {
-        return {
+export default class Register extends React.Component {
+    static contextTypes = {
+        router: React.PropTypes.func.isRequired
+    };
+    constructor(props) {
+        super(props);
+        this.state = {
             username: '',
             password: '',
         }
-    },
-    componentDidMount: function() {
+    }
+    componentDidMount() {
         //隐藏加载gif
         $(".loading").hide();
-    },
-    register: function() {
-        var that = this;
+    }
+    handleChange(e) {
+        let newState = {};
+        newState[e.target.name] = e.target.value;
+        this.setState(newState);
+    }
+    register() {
+        let that = this;
         $.post("/zuiwan-backend/index.php/user/register", {
                 username: that.state.username,
                 password: md5(that.state.password)
@@ -36,23 +38,21 @@ var Register = React.createClass({
             .fail(function(res) {
                 console.log(res);
             });
-    },
-    render: function() {
-        var faviconURL = require('../../img/favicon.png');
+    }
+    render() {
+        let faviconURL = require('../../img/favicon.png');
         return (
             <div className="register">
                 <div className="register-content">
                     <div className="add-avatar">
                         <img src={faviconURL} alt="" />
                     </div>
-                    <input type="text" placeholder="邮箱" valueLink={this.linkState('username')}/>
-                    <input type="password" placeholder="密码" valueLink={this.linkState('password')}/>
-                    <div className="register-button" onClick={this.register}>注册</div>
+                    <input type="text" name="username" placeholder="邮箱" defaultValue={this.state.username} onChange={this.handleChange.bind(this)}  />
+                    <input type="password" name="password" placeholder="密码" defaultValue={this.state.password} onChange={this.handleChange.bind(this)} />
+                    <div className="register-button" onClick={this.register.bind(this)}>注册</div>
                 </div>
             </div>
         );
     }
 
-});
-
-module.exports = Register;
+}

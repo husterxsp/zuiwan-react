@@ -1,12 +1,11 @@
-var React = require('react');
-import ArticleList
-from '../../ArticleList/ArticleList.js'
+import React from 'react';
+import ArticleList from '../../ArticleList/ArticleList.js';
+import './MediaDetail.less';
 
-import './MediaDetail.less'
-
-var MediaDetail = React.createClass({
-    getInitialState: function() {
-        return {
+export default class MediaDetail extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
             showLoading: true,
             mediaInfo: {
                 article_count: 0,
@@ -18,10 +17,10 @@ var MediaDetail = React.createClass({
                 media_name: "",
             }
         };
-    },
-    componentDidMount: function() {
-        var that = this;
-        $.get("/zuiwan-backend/index.php/media/get_one_media", {
+    }
+    componentDidMount() {
+        let that = this;
+        $.get("http://zuiwant.com/zuiwan-backend/index.php/media/get_one_media", {
                 id: that.props.params.id
             })
             .done(function(res) {
@@ -35,9 +34,9 @@ var MediaDetail = React.createClass({
             .fail(function(res) {
                 console.log(res);
             });
-    },
-    render: function() {
-        var mediaInfo = this.state.mediaInfo;
+    }
+    render() {
+        let mediaInfo = this.state.mediaInfo;
         return (
             <div className="media-detail">
                 <div className="intro">
@@ -70,6 +69,4 @@ var MediaDetail = React.createClass({
         );
     }
 
-});
-
-module.exports = MediaDetail;
+}

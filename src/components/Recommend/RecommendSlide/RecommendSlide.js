@@ -1,16 +1,18 @@
-var React = require('react');
+import React from 'react';
 import {
     Link
 }
-from 'react-router'
-import './RecommendSlide.less'
+from 'react-router';
+import './RecommendSlide.less';
 
-module.exports = React.createClass({
-
-    render: function() {
-        var slide = this.props.slide;
-        var slideIndex = this.props.index;
-        var slideComps = slide.map(function(item) {
+export default class RecommendSlide extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    render() {
+        let slide = this.props.slide;
+        let slideIndex = this.props.index;
+        let slideComps = slide.map((item) => {
             return (
                 <Link key={item.id} to={'/article/'+item.id} style={{backgroundImage: 'url('+item.article_img+')'}}>
                     <div className="content">
@@ -22,7 +24,7 @@ module.exports = React.createClass({
                 </Link>
             );
         });
-        var dotComps = [1, 2, 3].map(function(item, index) {
+        let dotComps = [1, 2, 3].map((item, index) => {
             return (<span key={index} className={ slideIndex == index ? 'active' : '' }></span>);
         });
         return (
@@ -39,4 +41,4 @@ module.exports = React.createClass({
         );
     }
 
-});
+}

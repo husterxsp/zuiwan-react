@@ -1,12 +1,13 @@
-var React = require('react');
+import React from 'react';
 
-
-module.exports = React.createClass({
-
-    render: function() {
+export default class Back extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    render() {
         return (
-            <Link to="/"/>
+            <Link to="/" />
         );
     }
 
-});
+}

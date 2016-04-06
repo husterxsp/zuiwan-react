@@ -1,27 +1,36 @@
-import React from 'react'
+import React from 'react';
+import md5 from 'md5';
+import {
+    Link
+}
+from 'react-router';
+import './Login.less';
 
-var LinkedStateMixin = require('react/lib/LinkedStateMixin');
-var md5 = require('md5');
-var Link = require('react-router').Link;
-
-import './Login.less'
-
-module.exports = React.createClass({
-    mixins: [LinkedStateMixin],
-    contextTypes: {
-        router: React.PropTypes.object.isRequired
-    },
-    getInitialState: function() {
-        return {
+export default class Login extends React.Component {
+    static contextTypes = {
+        router: React.PropTypes.func.isRequired
+    };
+    constructor(props) {
+        super(props);
+        this.state = {
             username: '',
             password: '',
         }
-    },
-    componentDidMount: function() {
+    }
+    handleChange(e) {
+        // var type = e.target.name;
+        // this.setState({
+        //     type: e.target.value
+        // });
+        let newState = {};
+        newState[e.target.name] = e.target.value;
+        this.setState(newState);
+    }
+    componentDidMount() {
         //隐藏加载gif
         $(".loading").hide();
-    },
-    login: function() {
+    }
+    login() {
         var that = this;
         $.post("/zuiwan-backend/index.php/user/login", {
                 username: that.state.username,
@@ -36,20 +45,20 @@ module.exports = React.createClass({
             })
             .fail(function(res) {
                 console.log(res);
-            });
-    },
-    render: function() {
+            })
+    }
+    render() {
         return (
             <div className="login">
                 <div className="login-content">
                     <div className="title">ZuiWan</div>
-                    <input type="text" placeholder="邮箱" valueLink={this.linkState('username')}  />
-                    <input type="password" placeholder="密码" valueLink={this.linkState('password')}/>
+                    <input type="text" name="username" placeholder="邮箱" defaultValue={this.state.username} onChange={this.handleChange.bind(this)}  />
+                    <input type="password" name="password" placeholder="密码" defaultValue={this.state.password} onChange={this.handleChange.bind(this)} />
                     <div className="to-register"><Link to="/me/register">注册</Link></div>
-                    <div className="login-button" onClick={this.login}>登录</div>
+                    <div className="login-button" onClick={this.login.bind(this)}>登录</div>
                 </div>
             </div>
         );
     }
 
-});
+}

@@ -1,22 +1,21 @@
-import React from 'react'
+import React from 'react';
 import {
     Link
 }
-from 'react-router'
-
+from 'react-router';
 import './Topic.less';
 
-module.exports = React.createClass({
-
-    getInitialState: function() {
-        return {
+export default class Topic extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
             showLoading: true,
             topic: [],
         };
-    },
-    componentDidMount: function() {
-        var that = this;
-        $.get("/zuiwan-backend/index.php/topic/get_topic")
+    }
+    componentDidMount() {
+        let that = this;
+        $.get("http://zuiwant.com/zuiwan-backend/index.php/topic/get_topic")
             .done(function(res) {
                 that.setState({
                     showLoading: false,
@@ -28,10 +27,10 @@ module.exports = React.createClass({
             .fail(function(res) {
                 console.log(res);
             });
-    },
-    render: function() {
-        var topic = this.state.topic;
-        var topicComps = topic.map(function(item) {
+    }
+    render() {
+        let topic = this.state.topic;
+        let topicComps = topic.map((item) => {
             return <Link key={item.id} to={"/topic/"+item.id} style={{backgroundImage: 'url(' + item.topic_img + ')'}}>
                         <div className="content">
                             <div className="title">
@@ -49,4 +48,4 @@ module.exports = React.createClass({
         )
     }
 
-});
+}

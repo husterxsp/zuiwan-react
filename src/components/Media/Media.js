@@ -1,23 +1,21 @@
-import React from 'react'
+import React from 'react';
 import {
     Link
 }
-from 'react-router'
-
+from 'react-router';
 import './Media.less';
 
-
-module.exports = React.createClass({
-
-    getInitialState: function() {
-        return {
+export default class Media extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
             showLoading: true,
             media: [],
         };
-    },
-    componentDidMount: function() {
-        var that = this;
-        $.get("/zuiwan-backend/index.php/media/get_media")
+    }
+    componentDidMount() {
+        let that = this;
+        $.get("http://zuiwant.com/zuiwan-backend/index.php/media/get_media")
             .done(function(res) {
                 that.setState({
                     showLoading: false,
@@ -29,12 +27,12 @@ module.exports = React.createClass({
             .fail(function(res) {
                 console.log(res);
             });
-    },
-    render: function() {
-        var media = this.state.media;
-        var mediaComps = media.map(function(item, i) {
+    }
+    render() {
+        let media = this.state.media;
+        let mediaComps = media.map((item, index) => {
             return (
-                <li key={i}>
+                <li key={index}>
                     <Link to={"/media/"+item.id}>
                         <img className="media-logo" src={item.media_avatar} />
                         <div className="content">
@@ -52,4 +50,4 @@ module.exports = React.createClass({
         )
     }
 
-});
+}

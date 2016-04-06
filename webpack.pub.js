@@ -1,16 +1,9 @@
 var webpack = require('webpack');
 var path = require('path');
-var node_modules_dir = path.join(__dirname, 'node_modules');
+var node_modules_dir = path.resolve(__dirname, 'node_modules');
 
-var deps = [
-    'react/dist/react.min.js',
-    'react-router/dist/react-router.min.js',
-];
-
-var config = {
+module.exports = {
     entry: [
-        'webpack/hot/dev-server',
-        'webpack-dev-server/client?http://localhost:8080/',
         path.resolve(__dirname, 'src/main.js')
     ],
     output: {
@@ -18,13 +11,8 @@ var config = {
         filename: 'bundle.js',
         publicPath: "build",
     },
-    resolve: {
-        extensions: ['', '.js', '.jsx', '.less', '.css'],
-        alias: {},
-    },
     postcss: [require('autoprefixer')],
     module: {
-        noParse: [],
         loaders: [{
             test: /\.jsx?$/,
             loaders: ['babel'],
@@ -41,21 +29,15 @@ var config = {
         }]
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoErrorsPlugin(),
         new webpack.ProvidePlugin({
             $: "jquery",
             jQuery: "jquery",
             "window.jQuery": "jquery"
         })
-    ],
-
+    ]
 };
-
-deps.forEach(function(dep) {
-    var depPath = path.resolve(node_modules_dir, dep);
-    config.resolve.alias[dep.split(path.sep)[0]] = depPath;
-    config.module.noParse.push(depPath);
+new webpack.DefinePlugin({
+    "process.env": {
+        NODE_ENV: JSON.stringify("production")
+    }
 });
-
-module.exports = config;
