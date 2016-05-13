@@ -1,13 +1,8 @@
-var webpack = require('webpack');
-var path = require('path');
-var node_modules_dir = path.join(__dirname, 'node_modules');
+const webpack = require('webpack');
+const path = require('path');
+const node_modules_dir = path.join(__dirname, 'node_modules');
 
-var deps = [
-    'react/dist/react.min.js',
-    'react-router/dist/react-router.min.js',
-];
-
-var config = {
+module.exports = {
     entry: [
         'webpack/hot/dev-server',
         'webpack-dev-server/client?http://localhost:8080/',
@@ -51,11 +46,3 @@ var config = {
     ],
 
 };
-
-deps.forEach(function(dep) {
-    var depPath = path.resolve(node_modules_dir, dep);
-    config.resolve.alias[dep.split(path.sep)[0]] = depPath;
-    config.module.noParse.push(depPath);
-});
-
-module.exports = config;

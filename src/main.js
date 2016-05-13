@@ -1,7 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {
-    Router, Route, Redirect, browserHistory, IndexRoute, IndexRedirect, hashHistory
+    Router,
+    Route,
+    Redirect,
+    browserHistory,
+    IndexRoute,
+    IndexRedirect,
+    hashHistory,
 }
 from 'react-router';
 
@@ -16,12 +22,12 @@ import Login from './components/Login/Login.js';
 import Register from './components/Register/Register.js';
 import Article from './components/Article/Article.js';
 
-import "./css/main.less";
-import "./css/day.less";
-import "./css/fontello.css";
+import './css/main.less';
+import './css/day.less';
+import './css/fontello.css';
 
 function showLoading() {
-    $(".loading").show();
+    $('.loading').show();
 }
 
 ReactDOM.render(
@@ -38,9 +44,9 @@ ReactDOM.render(
                 <Route path="register" component={Register} />
             </Route>
         </Route>
-        <Route path='topic/:id' component={TopicDetail} onEnter={showLoading}></Route>
-        <Route path='media/:id' component={MediaDetail} onEnter={showLoading}></Route>
-        <Route path='article/:id' component={Article} onEnter={showLoading}></Route>
+        <Route path="topic/:id" component={TopicDetail} onEnter={showLoading}></Route>
+        <Route path="media/:id" component={MediaDetail} onEnter={showLoading}></Route>
+        <Route path="article/:id" component={Article} onEnter={showLoading}></Route>
     </Router>,
     document.getElementById('App')
 )

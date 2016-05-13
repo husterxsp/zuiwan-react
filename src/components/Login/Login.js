@@ -9,7 +9,7 @@ import './Login.less';
 export default class Login extends React.Component {
     static contextTypes = {
         router: React.PropTypes.func.isRequired
-    };
+    }
     constructor(props) {
         super(props);
         this.state = {
@@ -28,22 +28,21 @@ export default class Login extends React.Component {
     }
     componentDidMount() {
         //隐藏加载gif
-        $(".loading").hide();
+        $('.loading').hide();
     }
     login() {
-        var that = this;
-        $.post("/zuiwan-backend/index.php/user/login", {
-                username: that.state.username,
-                password: md5(that.state.password)
+        $.post('/zuiwan-backend/index.php/user/login', {
+                username: this.state.username,
+                password: md5(this.state.password),
             })
-            .done(function(res) {
+            .done(res => {
                 if (res.status == 1) {
-                    that.context.router.push("/me/account");
+                    this.context.router.push('/me/account');
                 } else {
                     alert(res.message);
                 }
             })
-            .fail(function(res) {
+            .fail(res => {
                 console.log(res);
             })
     }

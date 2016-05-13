@@ -18,73 +18,72 @@ export default class Recommend extends React.Component {
     }
     componentDidMount() {
         this.getRecommend();
-        window.addEventListener('scroll', this.handleScroll);
+        window.addEventListener('scroll', this.handleScroll.bind(this));
     }
     componentWillUnmount() {
-        window.removeEventListener('scroll', this.handleScroll);
+        window.removeEventListener('scroll', this.handleScroll.bind(this));
     }
     handleScroll(e) {
         let body = e.target.body;
         let height1 = body.offsetHeight + body.scrollTop;
-        if (height1 > $("#App").height() - 300) {
+        if (height1 > $('#App').height() - 300) {
             if (!this.state.loadingData && this.state.page) {
                 this.getRecommend();
                 this.setState({
-                    loadingData: true
+                    loadingData: true,
                 })
             }
         }
     }
-    getRecommend() {
-        let that = this;
-        let page = that.state.page;
-        $.get("http://zuiwant.com/zuiwan-backend/index.php/article/get_recommend", {
-                page: page
+    setRecommend(res, page) {
+        if (page == 1) {
+            // 首次加载
+            page++;
+            this.setState({
+                banner: res.banner,
+                recommend: res.recommend,
             })
-            .done(function(res) {
-                if (page == 1) {
-                    // 首次加载
-                    page++;
-                    that.setState({
-                        banner: res.banner,
-                        recommend: res.recommend,
-                    })
-                    that.initSlide();
+            this.initSlide();
 
-                    //隐藏加载gif
-                    $(".loading").hide();
-                } else {
-                    page++;
-                    that.setState({
-                        recommend: that.state.recommend.concat(res.recommend),
-                        loadingData: false,
-                    });
-                    if (that.state.recommend.length >= res.recommendCount) {
-                        //已加载完
-                        page = 0;
-                    }
-                }
-                that.setState({
-                    page: page,
-                    loadingData: false,
-                })
-
-            })
-            .fail(function(res) {
-                console.log(res);
+            //隐藏加载gif
+            $('.loading').hide();
+        } else {
+            page++;
+            this.setState({
+                recommend: this.state.recommend.concat(res.recommend),
+                loadingData: false,
             });
+            if (this.state.recommend.length >= res.recommendCount) {
+                //已加载完
+                page = 0;
+            }
+        }
+        this.setState({
+            page: page,
+            loadingData: false,
+        })
+    }
+    getRecommend() {
+        let page = this.state.page;
+        fetch(`http://zuiwant.com/zuiwan-backend/index.php/article/get_recommend?page=${page}`)
+            .then((res) => {
+                res.json().then((data) => {
+                    this.setRecommend(data, page);
+                });
+            }, (res) => {
+                console.log(res.status);
+            })
     }
     initSlide() {
-        let that = this;
-        new Swipe($(".recommend #slide")[0], {
+        new Swipe($('.recommend #slide')[0], {
             startSlide: 0,
             speed: 400,
             auto: 3000,
             continuous: true,
             disableScroll: false,
             stopPropagation: false,
-            callback: function(index, elem) {
-                that.setState({
+            callback: (index, elem) => {
+                this.setState({
                     bannerIndex: index
                 })
             }

@@ -13,35 +13,33 @@ export default class TopicDetail extends React.Component {
             topicInfo: {
                 article_count: 2,
                 articles: [],
-                topic_img: "",
-                topic_intro: "",
-                topic_name: "",
+                topic_img: '',
+                topic_intro: '',
+                topic_name: '',
             }
         };
     }
     componentDidMount() {
-        let that = this;
-        $.get("http://zuiwant.com/zuiwan-backend/index.php/topic/get_one_topic", {
+        $.get('http://zuiwant.com/zuiwan-backend/index.php/topic/get_one_topic', {
                 id: that.props.params.id
             })
-            .done(function(res) {
+            .done(res => {
                 that.setState({
                     showLoading: false,
                     topicInfo: res
                 });
                 //隐藏加载gif
-                $(".loading").hide();
+                $('.loading').hide();
             })
-            .fail(function(res) {
+            .fail(res => {
                 console.log(res);
             });
     }
     render() {
-        let topicInfo = this.state.topicInfo;
-        let articleComps = topicInfo.articles.map((item) => {
-            return (
-                <div className="topic-article" key={item.id}>
-                    <Link to={'/article/'+item.id} className="title-image" style={{backgroundImage: 'url('+item.article_img+')'}}>
+        const topicInfo = this.state.topicInfo;
+        const articleComps = topicInfo.articles.map(item =>
+            <div className="topic-article" key={item.id}>
+                    <Link to={`/article/${item.id}`} className="title-image" style={{backgroundImage: `url(${item.article_img})`}}>
                         <div className="title-content">
                             <div className="article-title">{item.article_title}</div>
                             <div className="topic-name"><i className="icon-topic"></i>{topicInfo.topic_name}</div>
@@ -56,11 +54,10 @@ export default class TopicDetail extends React.Component {
                         <div className="summary"><p>{item.article_intro}</p></div>
                     </div>
                 </div>
-            )
-        });
+        );
         return (
             <div className="topic-detail">
-        <div className="topic-intro" style={{backgroundImage: 'url('+topicInfo.topic_img+')'}}>
+                <div className="topic-intro" style={{backgroundImage: `url(${topicInfo.topic_img})`}}>
                     <div className="intro-content">
                         <div className="title">{topicInfo.topic_name}</div>
                         <p>{topicInfo.topic_intro}</p>

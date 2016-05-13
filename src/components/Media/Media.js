@@ -14,35 +14,32 @@ export default class Media extends React.Component {
         };
     }
     componentDidMount() {
-        let that = this;
-        $.get("http://zuiwant.com/zuiwan-backend/index.php/media/get_media")
-            .done(function(res) {
-                that.setState({
+        $.get('http://zuiwant.com/zuiwan-backend/index.php/media/get_media')
+            .done(res => {
+                this.setState({
                     showLoading: false,
                     media: res
                 });
                 //隐藏加载gif
-                $(".loading").hide();
+                $('.loading').hide();
             })
-            .fail(function(res) {
+            .fail(res => {
                 console.log(res);
             });
     }
     render() {
-        let media = this.state.media;
-        let mediaComps = media.map((item, index) => {
-            return (
-                <li key={index}>
-                    <Link to={"/media/"+item.id}>
-                        <img className="media-logo" src={item.media_avatar} />
-                        <div className="content">
-                            <div className="title">{item.media_name}</div>
-                            <div className="intro">{item.media_intro}</div>
-                        </div>
-                    </Link>
-                </li>
-            )
-        });
+        const media = this.state.media;
+        const mediaComps = media.map((item, index) =>
+            <li key={index}>
+                <Link to={`/media/${item.id}`}>
+                    <img className="media-logo" src={item.media_avatar} />
+                    <div className="content">
+                        <div className="title">{item.media_name}</div>
+                        <div className="intro">{item.media_intro}</div>
+                    </div>
+                </Link>
+            </li>
+        );
         return (
             <ul className="media">
                 {mediaComps}

@@ -11,14 +11,14 @@ export default class Tab extends React.Component {
         this.state = {
             showLoading: true,
             hideTab: false,
-            lastScrollTop: 0
+            lastScrollTop: 0,
         };
     }
     componentDidMount() {
-        window.addEventListener('scroll', this.handleScroll);
+        window.addEventListener('scroll', this.handleScroll.bind(this));
     }
     componentWillUnmount() {
-        window.removeEventListener('scroll', this.handleScroll);
+        window.removeEventListener('scroll', this.handleScroll.bind(this));
     }
     handleScroll(e) {
         var scrollTop = e.srcElement.body.scrollTop;

@@ -15,7 +15,7 @@ export default class Register extends React.Component {
     }
     componentDidMount() {
         //隐藏加载gif
-        $(".loading").hide();
+        $('.loading').hide();
     }
     handleChange(e) {
         let newState = {};
@@ -23,24 +23,23 @@ export default class Register extends React.Component {
         this.setState(newState);
     }
     register() {
-        let that = this;
-        $.post("/zuiwan-backend/index.php/user/register", {
+        $.post('/zuiwan-backend/index.php/user/register', {
                 username: that.state.username,
                 password: md5(that.state.password)
             })
-            .done(function(res) {
+            .done(res => {
                 if (res.status == 1) {
-                    this.context.router.push("/me/account");
+                    this.context.router.push('/me/account');
                 } else {
                     alert(res.message);
                 }
             })
-            .fail(function(res) {
+            .fail(res => {
                 console.log(res);
             });
     }
     render() {
-        let faviconURL = require('../../img/favicon.png');
+        const faviconURL = require('../../img/favicon.png');
         return (
             <div className="register">
                 <div className="register-content">

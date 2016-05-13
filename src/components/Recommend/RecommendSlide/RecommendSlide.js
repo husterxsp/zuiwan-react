@@ -12,21 +12,19 @@ export default class RecommendSlide extends React.Component {
     render() {
         let slide = this.props.slide;
         let slideIndex = this.props.index;
-        let slideComps = slide.map((item) => {
-            return (
-                <Link key={item.id} to={'/article/'+item.id} style={{backgroundImage: 'url('+item.article_img+')'}}>
-                    <div className="content">
-                        <div className="title">{item.article_title}</div>
-                        <span><i className="icon-media"></i>{item.article_media_name}</span>
-                        <span><i className="icon-topic"></i>{item.article_topic_name}</span>
-                        <p>{item.article_intro}</p>
-                    </div>
-                </Link>
-            );
-        });
-        let dotComps = [1, 2, 3].map((item, index) => {
-            return (<span key={index} className={ slideIndex == index ? 'active' : '' }></span>);
-        });
+        const slideComps = slide.map(item =>
+            <Link key={item.id} to={`/article/${item.id}`} style={{backgroundImage: `url(${item.article_img})`}}>
+                <div className="content">
+                    <div className="title">{item.article_title}</div>
+                    <span><i className="icon-media"></i>{item.article_media_name}</span>
+                    <span><i className="icon-topic"></i>{item.article_topic_name}</span>
+                    <p>{item.article_intro}</p>
+                </div>
+            </Link>
+        );
+        const dotComps = [1, 2, 3].map((item, index) =>
+            <span key={index} className={ slideIndex == index ? 'active' : '' }></span>
+        );
         return (
             <div id="slide-hold">
                 <div id="slide">

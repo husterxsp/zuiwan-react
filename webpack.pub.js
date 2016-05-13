@@ -1,6 +1,6 @@
-var webpack = require('webpack');
-var path = require('path');
-var node_modules_dir = path.resolve(__dirname, 'node_modules');
+const webpack = require('webpack');
+const path = require('path');
+const node_modules_dir = path.resolve(__dirname, 'node_modules');
 
 module.exports = {
     entry: [
@@ -9,7 +9,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'build'),
         filename: 'bundle.js',
-        publicPath: "build",
+        publicPath: "./build/"
     },
     postcss: [require('autoprefixer')],
     module: {
